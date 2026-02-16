@@ -1,0 +1,3 @@
+﻿Repairing migrations table...
+Marked 2026_02_14_100018_create_wisata_table as migrated.
+Repair complete.

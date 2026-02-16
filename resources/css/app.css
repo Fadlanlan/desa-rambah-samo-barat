@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    body {
+        @apply font-sans text-slate-900 antialiased bg-slate-50;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        @apply tracking-tight;
+    }
+}
+
+@layer components {
+    .btn-primary {
+        @apply inline-flex items-center px-4 py-2 bg-brand-blue-600 border border-transparent rounded-lg font-semibold text-xs text-white uppercase tracking-widest hover:bg-brand-blue-700 active:bg-brand-blue-900 focus:outline-none focus:ring-2 focus:ring-brand-blue-500 focus:ring-offset-2 transition ease-in-out duration-150 shadow-md hover:shadow-lg;
+    }
+
+    .btn-secondary {
+        @apply inline-flex items-center px-4 py-2 bg-brand-green-600 border border-transparent rounded-lg font-semibold text-xs text-white uppercase tracking-widest hover:bg-brand-green-700 active:bg-brand-green-900 focus:outline-none focus:ring-2 focus:ring-brand-green-500 focus:ring-offset-2 transition ease-in-out duration-150 shadow-md hover:shadow-lg;
+    }
+
+    .glass {
+        @apply bg-white/70 backdrop-blur-md border border-white/20 shadow-glass;
+    }
+
+    .card {
+        @apply bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden transition-all duration-300 hover:shadow-md;
+    }
+}

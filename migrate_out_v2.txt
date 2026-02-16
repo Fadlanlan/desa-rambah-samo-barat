@@ -1,0 +1,5 @@
+﻿
+   INFO  Running migrations.  
+
+  2026_02_15_200000_add_blind_indices_to_warga_tables ................................................... 95.88ms DONE
+

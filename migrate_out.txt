@@ -1,0 +1,26 @@
+﻿
+   INFO  Running migrations.  
+
+  2026_02_14_100018_create_wisata_table ................................................................. 15.28ms FAIL
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[HY000]: General error: 1 table "wisata" already exists (Connection: sqlite, Database: C:\laravel-projects\desa-rambah-samo-barat\database\database.sqlite, SQL: create table "wisata" ("id" integer primary key autoincrement not null, "uuid" varchar not null, "nama" varchar not null, "slug" varchar not null, "deskripsi" text, "lokasi" varchar, "harga_tiket" varchar, "jam_operasional" varchar, "kontak" varchar, "gambar" varchar, "is_active" tinyint(1) not null default '1', "created_at" datetime, "updated_at" datetime, "deleted_at" datetime))
+
+  at vendor\laravel\framework\src\Illuminate\Database\Connection.php:838
+    834▕             $exceptionType = $this->isUniqueConstraintError($e)
+    835▕                 ? UniqueConstraintViolationException::class
+    836▕                 : QueryException::class;
+    837▕ 
+  ➜ 838▕             throw new $exceptionType(
+    839▕                 $this->getNameWithReadWriteType(),
+    840▕                 $query,
+    841▕                 $this->prepareBindings($bindings),
+    842▕                 $e,
+
+  1   vendor\laravel\framework\src\Illuminate\Database\Connection.php:578
+      PDOException::("SQLSTATE[HY000]: General error: 1 table "wisata" already exists")
+
+  2   vendor\laravel\framework\src\Illuminate\Database\Connection.php:578
+      PDO::prepare("create table "wisata" ("id" integer primary key autoincrement not null, "uuid" varchar not null, "nama" varchar not null, "slug" varchar not null, "deskripsi" text, "lokasi" varchar, "harga_tiket" varchar, "jam_operasional" varchar, "kontak" varchar, "gambar" varchar, "is_active" tinyint(1) not null default '1', "created_at" datetime, "updated_at" datetime, "deleted_at" datetime)")
+

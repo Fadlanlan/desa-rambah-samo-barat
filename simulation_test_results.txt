@@ -1,0 +1,2 @@
+--- Simulation Test ---
+SUCCESS: Resident created. ID: 53

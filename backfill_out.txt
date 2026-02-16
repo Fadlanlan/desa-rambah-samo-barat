@@ -1,0 +1,6 @@
+﻿--- Backfilling Blind Indices ---
+Processing Penduduk...
+Done Penduduk.
+Processing Keluarga...
+Done Keluarga.
+Backfill Complete!

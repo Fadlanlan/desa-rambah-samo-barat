@@ -1,0 +1,5 @@
+﻿--- Identity Verification Test ---
+Surat Created with ID: 4
+KTP Path Exists: YES
+Selfie Path Exists: YES
+Cleanup complete.
