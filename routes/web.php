@@ -27,6 +27,7 @@ $registerRoutes = function ($domain = null) {
             Route::post('system/update', [\App\Http\Controllers\SuperAdmin\SystemController::class , 'updateSettings'])->name('superadmin.system.updateSettings');
             Route::post('system/backup', [\App\Http\Controllers\SuperAdmin\SystemController::class , 'backup'])->name('superadmin.system.backup');
             Route::post('lock/{target}', [\App\Http\Controllers\SuperAdmin\SystemController::class , 'lockPage'])->name('superadmin.system.lockPage');
+            Route::post('logout', [\App\Http\Controllers\SuperAdmin\Auth\SuperAdminLoginController::class , 'destroy'])->name('superadmin.logout');
 
             Route::get('/', function () {
                     return redirect()->route('superadmin.dashboard');
@@ -171,5 +172,11 @@ if ($isLocal) {
 else {
     $registerRoutes($mainDomain);
 }
+
+// Guest routes for Super Admin access
+Route::middleware('guest')->group(function () {
+    Route::get('superadmin/access', [\App\Http\Controllers\SuperAdmin\Auth\SuperAdminLoginController::class , 'create'])->name('superadmin.login');
+    Route::post('superadmin/access', [\App\Http\Controllers\SuperAdmin\Auth\SuperAdminLoginController::class , 'store'])->name('superadmin.login.store');
+});
 
 require __DIR__ . '/auth.php';

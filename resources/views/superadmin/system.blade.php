@@ -97,4 +97,3 @@
     </div>
 </div>
 @endsection
- immigrant view logic is slightly complex, so I'll keep it simple for now.

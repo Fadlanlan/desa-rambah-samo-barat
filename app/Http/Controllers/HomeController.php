@@ -52,6 +52,8 @@ class HomeController extends Controller
         $umkms = Umkm::where('is_active', true)->latest()->take(4)->get();
         $wisatas = Wisata::where('is_active', true)->latest()->take(3)->get();
 
-        return view('welcome', compact('latestNews', 'featuredNews', 'stats', 'galleries', 'umkms', 'wisatas', 'pengumuman', 'agenda'));
+        $isLocked = \App\Models\Setting::get('system_lock_user', '0') === '1';
+
+        return view('welcome', compact('latestNews', 'featuredNews', 'stats', 'galleries', 'umkms', 'wisatas', 'pengumuman', 'agenda', 'isLocked'));
     }
 }

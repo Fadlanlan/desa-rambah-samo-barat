@@ -28,56 +28,74 @@
                             <ul role="list" class="flex flex-1 flex-col gap-y-7">
                                 <li>
                                     <ul role="list" class="-mx-2 space-y-1">
-                                        <li>
-                                            <a href="{{ route('dashboard') }}" class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 bg-brand-blue-800 text-white">
-                                                Dashboard
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ route('warga.index') }}" class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 {{ request()->routeIs('warga.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }}">
-                                                Kependudukan
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ route('keluarga.index') }}" class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 {{ request()->routeIs('keluarga.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }}">
-                                                Keluarga
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ route('berita.index') }}" class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 {{ request()->routeIs('berita.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }}">
-                                                Berita & Konten
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ route('wisata.index') }}" class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 {{ request()->routeIs('wisata.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }}">
-                                                Wisata Desa
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ route('surat.index') }}" class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 {{ request()->routeIs('surat.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }}">
-                                                Permohonan Surat
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ route('jenis-surat.index') }}" class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 {{ request()->routeIs('jenis-surat.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }}">
-                                                Jenis Surat
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ route('pengaduan.index') }}" class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 {{ request()->routeIs('pengaduan.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }}">
-                                                Aduan Warga
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ route('antrian.index') }}" class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 {{ request()->routeIs('antrian.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }}">
-                                                Antrian Online
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ route('audit.index') }}" class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 {{ request()->routeIs('audit.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }}">
-                                                Audit Log
-                                            </a>
-                                        </li>
+                                        @if(auth()->user()->hasRole('super-admin'))
+                                            <li>
+                                                <a href="{{ route('superadmin.dashboard') }}" class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 {{ request()->routeIs('superadmin.dashboard') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }}">
+                                                    Super Dashboard
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('superadmin.user.index') }}" class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 {{ request()->routeIs('superadmin.user.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }}">
+                                                    Manajemen User
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('superadmin.system') }}" class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 {{ request()->routeIs('superadmin.system') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }}">
+                                                    Sistem & Log
+                                                </a>
+                                            </li>
+                                        @else
+                                            <li>
+                                                <a href="{{ route('dashboard') }}" class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 bg-brand-blue-800 text-white">
+                                                    Dashboard
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('warga.index') }}" class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 {{ request()->routeIs('warga.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }}">
+                                                    Kependudukan
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('keluarga.index') }}" class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 {{ request()->routeIs('keluarga.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }}">
+                                                    Keluarga
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('berita.index') }}" class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 {{ request()->routeIs('berita.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }}">
+                                                    Berita & Konten
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('wisata.index') }}" class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 {{ request()->routeIs('wisata.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }}">
+                                                    Wisata Desa
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('surat.index') }}" class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 {{ request()->routeIs('surat.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }}">
+                                                    Permohonan Surat
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('jenis-surat.index') }}" class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 {{ request()->routeIs('jenis-surat.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }}">
+                                                    Jenis Surat
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('pengaduan.index') }}" class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 {{ request()->routeIs('pengaduan.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }}">
+                                                    Aduan Warga
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('antrian.index') }}" class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 {{ request()->routeIs('antrian.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }}">
+                                                    Antrian Online
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('audit.index') }}" class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 {{ request()->routeIs('audit.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }}">
+                                                    Audit Log
+                                                </a>
+                                            </li>
+                                        @endif
                                     </ul>
                                 </li>
                             </ul>
@@ -118,104 +136,108 @@
                                     <li class="border-b border-brand-blue-800 my-4"></li>
                                 @endif
 
-                                <li>
-                                    <a href="{{ route('dashboard') }}" class="{{ request()->routeIs('dashboard') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }} group flex gap-x-3 rounded-lg p-3 text-sm font-semibold leading-6 transition-all">
-                                        Admin Dashboard
-                                    </a>
-                                </li>
-                                <li>
-                                    <span class="text-xs font-semibold leading-6 text-brand-blue-400 uppercase tracking-widest pl-2 mt-4 inline-block">Manajemen</span>
-                                    <a href="{{ route('warga.index') }}" class="{{ request()->routeIs('warga.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }} group flex gap-x-3 rounded-lg p-3 text-sm font-semibold leading-6 transition-all mt-1">
-                                        Kependudukan
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('keluarga.index') }}" class="{{ request()->routeIs('keluarga.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }} group flex gap-x-3 rounded-lg p-3 text-sm font-semibold leading-6 transition-all">
-                                        Keluarga
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('berita.index') }}" class="{{ request()->routeIs('berita.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }} group flex gap-x-3 rounded-lg p-3 text-sm font-semibold leading-6 transition-all">
-                                        Berita & Konten
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('surat.index') }}" class="{{ request()->routeIs('surat.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }} group flex gap-x-3 rounded-lg p-3 text-sm font-semibold leading-6 transition-all">
-                                        Permohonan Surat
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('jenis-surat.index') }}" class="{{ request()->routeIs('jenis-surat.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }} group flex gap-x-3 rounded-lg p-3 text-sm font-semibold leading-6 transition-all">
-                                        Jenis Surat
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('pengaduan.index') }}" class="{{ request()->routeIs('pengaduan.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }} group flex gap-x-3 rounded-lg p-3 text-sm font-semibold leading-6 transition-all mt-1">
-                                        Aduan Warga
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('antrian.index') }}" class="{{ request()->routeIs('antrian.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }} group flex gap-x-3 rounded-lg p-3 text-sm font-semibold leading-6 transition-all mt-1">
-                                        Antrian Online
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('audit.index') }}" class="{{ request()->routeIs('audit.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }} group flex gap-x-3 rounded-lg p-3 text-sm font-semibold leading-6 transition-all mt-1">
-                                        Audit Log
-                                    </a>
-                                </li>
+                                @if(!auth()->user()->hasRole('super-admin'))
+                                    <li>
+                                        <a href="{{ route('dashboard') }}" class="{{ request()->routeIs('dashboard') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }} group flex gap-x-3 rounded-lg p-3 text-sm font-semibold leading-6 transition-all">
+                                            Admin Dashboard
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <span class="text-xs font-semibold leading-6 text-brand-blue-400 uppercase tracking-widest pl-2 mt-4 inline-block">Manajemen</span>
+                                        <a href="{{ route('warga.index') }}" class="{{ request()->routeIs('warga.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }} group flex gap-x-3 rounded-lg p-3 text-sm font-semibold leading-6 transition-all mt-1">
+                                            Kependudukan
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('keluarga.index') }}" class="{{ request()->routeIs('keluarga.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }} group flex gap-x-3 rounded-lg p-3 text-sm font-semibold leading-6 transition-all">
+                                            Keluarga
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('berita.index') }}" class="{{ request()->routeIs('berita.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }} group flex gap-x-3 rounded-lg p-3 text-sm font-semibold leading-6 transition-all">
+                                            Berita & Konten
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('surat.index') }}" class="{{ request()->routeIs('surat.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }} group flex gap-x-3 rounded-lg p-3 text-sm font-semibold leading-6 transition-all">
+                                            Permohonan Surat
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('jenis-surat.index') }}" class="{{ request()->routeIs('jenis-surat.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }} group flex gap-x-3 rounded-lg p-3 text-sm font-semibold leading-6 transition-all">
+                                            Jenis Surat
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('pengaduan.index') }}" class="{{ request()->routeIs('pengaduan.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }} group flex gap-x-3 rounded-lg p-3 text-sm font-semibold leading-6 transition-all mt-1">
+                                            Aduan Warga
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('antrian.index') }}" class="{{ request()->routeIs('antrian.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }} group flex gap-x-3 rounded-lg p-3 text-sm font-semibold leading-6 transition-all mt-1">
+                                            Antrian Online
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('audit.index') }}" class="{{ request()->routeIs('audit.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }} group flex gap-x-3 rounded-lg p-3 text-sm font-semibold leading-6 transition-all mt-1">
+                                            Audit Log
+                                        </a>
+                                    </li>
 
-                                <li>
-                                    <span class="text-xs font-semibold leading-6 text-brand-blue-400 uppercase tracking-widest pl-2 mt-4 inline-block">Website & Informasi</span>
-                                    <a href="{{ route('pengumuman.index') }}" class="{{ request()->routeIs('pengumuman.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }} group flex gap-x-3 rounded-lg p-3 text-sm font-semibold leading-6 transition-all mt-1">
-                                        Pengumuman
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('agenda.index') }}" class="{{ request()->routeIs('agenda.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }} group flex gap-x-3 rounded-lg p-3 text-sm font-semibold leading-6 transition-all">
-                                        Agenda
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('galeri.index') }}" class="{{ request()->routeIs('galeri.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }} group flex gap-x-3 rounded-lg p-3 text-sm font-semibold leading-6 transition-all">
-                                        Galeri Foto
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('dokumen.index') }}" class="{{ request()->routeIs('dokumen.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }} group flex gap-x-3 rounded-lg p-3 text-sm font-semibold leading-6 transition-all">
-                                        Dokumen Publik
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('wisata.index') }}" class="{{ request()->routeIs('wisata.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }} group flex gap-x-3 rounded-lg p-3 text-sm font-semibold leading-6 transition-all">
-                                        Wisata Desa
-                                    </a>
-                                </li>
+                                    <li>
+                                        <span class="text-xs font-semibold leading-6 text-brand-blue-400 uppercase tracking-widest pl-2 mt-4 inline-block">Website & Informasi</span>
+                                        <a href="{{ route('pengumuman.index') }}" class="{{ request()->routeIs('pengumuman.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }} group flex gap-x-3 rounded-lg p-3 text-sm font-semibold leading-6 transition-all mt-1">
+                                            Pengumuman
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('agenda.index') }}" class="{{ request()->routeIs('agenda.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }} group flex gap-x-3 rounded-lg p-3 text-sm font-semibold leading-6 transition-all">
+                                            Agenda
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('galeri.index') }}" class="{{ request()->routeIs('galeri.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }} group flex gap-x-3 rounded-lg p-3 text-sm font-semibold leading-6 transition-all">
+                                            Galeri Foto
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('dokumen.index') }}" class="{{ request()->routeIs('dokumen.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }} group flex gap-x-3 rounded-lg p-3 text-sm font-semibold leading-6 transition-all">
+                                            Dokumen Publik
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('wisata.index') }}" class="{{ request()->routeIs('wisata.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }} group flex gap-x-3 rounded-lg p-3 text-sm font-semibold leading-6 transition-all">
+                                            Wisata Desa
+                                        </a>
+                                    </li>
 
-                                <li>
-                                    <span class="text-xs font-semibold leading-6 text-brand-blue-400 uppercase tracking-widest pl-2 mt-4 inline-block">Data Desa</span>
-                                    <a href="{{ route('apbdes.index') }}" class="{{ request()->routeIs('apbdes.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }} group flex gap-x-3 rounded-lg p-3 text-sm font-semibold leading-6 transition-all mt-1">
-                                        APBDes
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('umkm.index') }}" class="{{ request()->routeIs('umkm.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }} group flex gap-x-3 rounded-lg p-3 text-sm font-semibold leading-6 transition-all">
-                                        UMKM
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('kontak.index') }}" class="{{ request()->routeIs('kontak.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }} group flex gap-x-3 rounded-lg p-3 text-sm font-semibold leading-6 transition-all">
-                                        Pesan Masuk
-                                    </a>
-                                </li>
+                                    <li>
+                                        <span class="text-xs font-semibold leading-6 text-brand-blue-400 uppercase tracking-widest pl-2 mt-4 inline-block">Data Desa</span>
+                                        <a href="{{ route('apbdes.index') }}" class="{{ request()->routeIs('apbdes.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }} group flex gap-x-3 rounded-lg p-3 text-sm font-semibold leading-6 transition-all mt-1">
+                                            APBDes
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('umkm.index') }}" class="{{ request()->routeIs('umkm.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }} group flex gap-x-3 rounded-lg p-3 text-sm font-semibold leading-6 transition-all">
+                                            UMKM
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('kontak.index') }}" class="{{ request()->routeIs('kontak.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }} group flex gap-x-3 rounded-lg p-3 text-sm font-semibold leading-6 transition-all">
+                                            Pesan Masuk
+                                        </a>
+                                    </li>
+                                @endif
                             </ul>
                         </li>
 
-                        <li class="mt-auto">
-                            <a href="{{ route('pengaturan.index') }}" class="{{ request()->routeIs('pengaturan.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }} group -mx-2 flex gap-x-3 rounded-lg p-3 text-sm font-semibold leading-6 transition-all">
-                                Pengaturan
-                            </a>
-                        </li>
+                        @if(!auth()->user()->hasRole('super-admin'))
+                            <li class="mt-auto">
+                                <a href="{{ route('pengaturan.index') }}" class="{{ request()->routeIs('pengaturan.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }} group -mx-2 flex gap-x-3 rounded-lg p-3 text-sm font-semibold leading-6 transition-all">
+                                    Pengaturan
+                                </a>
+                            </li>
+                        @endif
                     </ul>
                 </nav>
             </div>
@@ -326,7 +348,7 @@
 
                             <div x-show="open" @click.away="open = false" class="absolute right-0 z-10 mt-2.5 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-slate-900/5 focus:outline-none">
                                 <a href="{{ route('profile.edit') }}" class="block px-3 py-1 text-sm leading-6 text-slate-900 hover:bg-slate-50">Profil</a>
-                                <form method="POST" action="{{ route('logout') }}">
+                                <form method="POST" action="{{ auth()->user()->hasRole('super-admin') ? route('superadmin.logout') : route('logout') }}">
                                     @csrf
                                     <button type="submit" class="block w-full text-left px-3 py-1 text-sm leading-6 text-slate-900 hover:bg-slate-50">Keluar</button>
                                 </form>

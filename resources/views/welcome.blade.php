@@ -31,12 +31,18 @@
             </p>
 
             <div class="flex flex-col sm:flex-row justify-center gap-4 pt-4">
-                <a href="{{ route('login') }}" class="btn-primary py-4 px-8 text-sm">
-                    Akses Layanan Mandiri
-                </a>
-                <a href="{{ route('public.berita.index') }}" class="btn-secondary py-4 px-8 text-sm bg-white !text-slate-700 border-slate-200 hover:bg-slate-50">
-                    Baca Berita Desa
-                </a>
+                @if($isLocked)
+                    <a href="#berlangganan" class="btn-primary py-4 px-12 text-base shadow-xl shadow-brand-blue-200">
+                        Berlangganan Sekarang
+                    </a>
+                @else
+                    <a href="{{ route('login') }}" class="btn-primary py-4 px-8 text-sm">
+                        Akses Layanan Mandiri
+                    </a>
+                    <a href="{{ route('public.berita.index') }}" class="btn-secondary py-4 px-8 text-sm bg-white !text-slate-700 border-slate-200 hover:bg-slate-50">
+                        Baca Berita Desa
+                    </a>
+                @endif
             </div>
         </div>
     </div>
@@ -147,6 +153,7 @@
 </section>
 @endif
 
+@if(!$isLocked)
 <!-- Latest News Section -->
 @if(isset($latestNews) && $latestNews->count() > 0)
 <section class="py-24 bg-slate-50">
@@ -199,6 +206,7 @@
     </div>
 </section>
 @endif
+@endif
 
 <!-- Features / Service Stats -->
 <section class="py-24 bg-white border-y border-slate-100">
@@ -209,7 +217,7 @@
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <!-- Card 1 -->
-            <a href="{{ route('login') }}" class="card p-8 group hover:-translate-y-2 transition-all" data-aos="fade-up" data-aos-delay="0">
+            <a href="{{ $isLocked ? '#berlangganan' : route('login') }}" class="card p-8 group hover:-translate-y-2 transition-all" data-aos="fade-up" data-aos-delay="0">
                 <div class="w-12 h-12 rounded-xl bg-brand-blue-50 flex items-center justify-center text-brand-blue-600 mb-6 transition-colors group-hover:bg-brand-blue-600 group-hover:text-white">
                     <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                 </div>
@@ -227,7 +235,7 @@
             </div>
 
             <!-- Card 3 -->
-            <a href="{{ route('public.pengaduan.create') }}" class="card p-8 group hover:-translate-y-2 transition-all" data-aos="fade-up" data-aos-delay="200">
+            <a href="{{ $isLocked ? '#berlangganan' : route('public.pengaduan.create') }}" class="card p-8 group hover:-translate-y-2 transition-all" data-aos="fade-up" data-aos-delay="200">
                 <div class="w-12 h-12 rounded-xl bg-amber-50 flex items-center justify-center text-amber-600 mb-6 transition-colors group-hover:bg-amber-600 group-hover:text-white">
                     <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"></path></svg>
                 </div>
@@ -397,6 +405,7 @@
 </section>
 @endif
 
+@if(!$isLocked)
 <!-- Stats Wrapper -->
 <div class="bg-gradient-to-br from-brand-blue-900 to-brand-green-900 py-24 text-white overflow-hidden relative">
     <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
@@ -421,4 +430,131 @@
         </div>
     </div>
 </div>
+@endif
+
+@if($isLocked)
+<!-- Section Berlangganan / Promosi -->
+<section id="berlangganan" class="py-24 bg-slate-50 overflow-hidden scroll-mt-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16" data-aos="fade-up">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-blue-50 border border-brand-blue-100 text-brand-blue-600 font-bold text-xs uppercase tracking-widest mb-6">
+                Premium Experience
+            </div>
+            <h2 class="text-4xl lg:text-6xl font-black text-slate-900 mb-6 tracking-tight leading-tight">
+                Transformasi Digital <br> <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue-600 to-brand-green-500">Tanpa Batas</span>
+            </h2>
+            <p class="text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
+                Rasakan pengalaman mengelola desa yang modern, cepat, dan transparan. Bergabunglah dengan puluhan desa lainnya yang telah beralih ke layanan digital premium.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+            <!-- Left: Experience Section -->
+            <div class="space-y-8" data-aos="fade-right">
+                <div class="bg-white p-10 rounded-[2.5rem] shadow-xl shadow-slate-200/50 border border-slate-100 relative overflow-hidden group">
+                    <div class="absolute -top-12 -right-12 w-32 h-32 bg-brand-blue-50 rounded-full blur-2xl group-hover:bg-brand-blue-100 transition-colors"></div>
+                    
+                    <h3 class="text-2xl font-bold text-slate-900 mb-8 flex items-center gap-3">
+                        <span class="p-2 bg-brand-blue-600 text-white rounded-lg">
+                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                        </span>
+                        Manfaat Untuk Warga
+                    </h3>
+                    
+                    <div class="space-y-6">
+                        <div class="flex gap-5">
+                            <div class="flex-shrink-0 w-12 h-12 rounded-2xl bg-brand-blue-50 flex items-center justify-center text-brand-blue-600">
+                                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 mb-1 leading-tight">Layanan 24/7 Tanpa Antri</h4>
+                                <p class="text-sm text-slate-500">Ajukan surat keterangan atau lapor masalah kapan saja dan di mana saja. Tidak perlu menunggu jam kantor.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-5">
+                            <div class="flex-shrink-0 w-12 h-12 rounded-2xl bg-brand-green-50 flex items-center justify-center text-brand-green-600">
+                                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 mb-1 leading-tight">Transparansi Real-Time</h4>
+                                <p class="text-sm text-slate-500">Pantau status permohonan Anda secara langsung melalui sistem pelacakan otomatis yang transparan.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-5">
+                            <div class="flex-shrink-0 w-12 h-12 rounded-2xl bg-amber-50 flex items-center justify-center text-amber-600">
+                                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A10.003 10.003 0 004.254 11H3m15.357 5.118L18.36 14.6l.054-.09a10.003 10.003 0 002.335-5.51H21m-2.144-5.113a10.016 10.016 0 01-2.853 0M10.5 4.5l-.054.09A10.003 10.003 0 008.11 10.1l-.054.09m4.887-5.187a10.016 10.016 0 013.132 0M9 21h6m-3-3v3m0-6a1 1 0 110-2 1 1 0 010 2z"/></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 mb-1 leading-tight">Keamanan Data Terjamin</h4>
+                                <p class="text-sm text-slate-500">Data kependudukan Anda dilindungi dengan enkripsi tingkat tinggi untuk kenyamanan privasi.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row items-center gap-6 pt-4">
+                    <a href="https://wa.me/6281234567890?text=Halo%20Admin,%20saya%20tertarik%20untuk%20berlangganan%20layanan%20surat%20dan%20admin%20desa." target="_blank" class="btn-primary py-5 px-12 text-lg shadow-2xl shadow-brand-blue-200 w-full sm:w-auto">
+                        Mulai Berlangganan
+                    </a>
+                    <div class="flex -space-x-3 overflow-hidden">
+                        <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                        <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                        <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80" alt="">
+                        <span class="flex items-center justify-center h-10 w-10 rounded-full ring-2 ring-white bg-slate-100 text-xs font-bold text-slate-500">+12 Desa</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Admin Features -->
+            <div class="relative" data-aos="fade-left">
+                <div class="bg-slate-900 rounded-[3rem] p-10 lg:p-14 text-white shadow-2xl relative z-10 border border-white/5">
+                    <h3 class="text-3xl font-black mb-10 pb-6 border-b border-white/10 flex items-center gap-4">
+                        <span class="text-brand-blue-400 uppercase tracking-widest text-sm font-bold">Admin Experience</span>
+                    </h3>
+                    
+                    <ul class="grid grid-cols-1 gap-10">
+                        <li class="group">
+                            <div class="flex items-start gap-5">
+                                <div class="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-brand-blue-400 font-black text-xl group-hover:bg-brand-blue-600 group-hover:text-white transition-all duration-300">
+                                    01
+                                </div>
+                                <div class="flex-1">
+                                    <h5 class="text-xl font-bold mb-2 text-white group-hover:text-brand-blue-300 transition-colors">Smart Dashboard</h5>
+                                    <p class="text-base text-white/50 leading-relaxed">Kelola ribuan data penduduk secara instan. Fitur filter cerdas memudahkan pencarian KK dan biodata warga dalam hitungan detik.</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="group">
+                            <div class="flex items-start gap-5">
+                                <div class="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-brand-blue-400 font-black text-xl group-hover:bg-brand-blue-600 group-hover:text-white transition-all duration-300">
+                                    02
+                                </div>
+                                <div class="flex-1">
+                                    <h5 class="text-xl font-bold mb-2 text-white group-hover:text-brand-blue-300 transition-colors">One-Click Surat</h5>
+                                    <p class="text-base text-white/50 leading-relaxed">Ucapkan selamat tinggal pada pengetikan manual. Sistem secara otomatis mengisi template surat dengan data kependudukan yang valid.</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="group">
+                            <div class="flex items-start gap-5">
+                                <div class="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-brand-blue-400 font-black text-xl group-hover:bg-brand-blue-600 group-hover:text-white transition-all duration-300">
+                                    03
+                                </div>
+                                <div class="flex-1">
+                                    <h5 class="text-xl font-bold mb-2 text-white group-hover:text-brand-blue-300 transition-colors">Engagement Monitoring</h5>
+                                    <p class="text-base text-white/50 leading-relaxed">Lihat perkembangan desa melalui grafik statistik yang indah. Pantau keaktifan warga dalam memberikan aduan dan masukan.</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Floating Elements -->
+                <div class="absolute -top-6 -right-6 w-32 h-32 bg-brand-green-500/20 rounded-full blur-3xl animate-pulse"></div>
+                <div class="absolute -bottom-6 -left-6 w-32 h-32 bg-brand-blue-500/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+            </div>
+        </div>
+    </div>
+</section>
+@endif
 @endsection

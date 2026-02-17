@@ -17,6 +17,9 @@
     <!-- AOS Animation -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
+@php
+    $isSystemLocked = \App\Models\Setting::get('system_lock_user', '0') === '1';
+@endphp
 <body class="font-sans text-slate-900 antialiased bg-slate-50 selection:bg-brand-blue-500 selection:text-white">
     <div class="min-h-screen flex flex-col">
         <!-- Navigation -->
@@ -69,14 +72,18 @@
                             </div>
                         </div>
                         <x-nav-link :href="route('public.berita.index')" :active="request()->routeIs('public.berita.*')">Berita</x-nav-link>
-                        <x-nav-link :href="route('public.surat.create')" :active="request()->routeIs('public.surat.*')">Layanan Surat</x-nav-link>
-                        <x-nav-link :href="route('public.antrian.create')" :active="request()->routeIs('public.antrian.*')">Antrian</x-nav-link>
+                        @if(!$isSystemLocked)
+                            <x-nav-link :href="route('public.surat.create')" :active="request()->routeIs('public.surat.*')">Layanan Surat</x-nav-link>
+                            <x-nav-link :href="route('public.antrian.create')" :active="request()->routeIs('public.antrian.*')">Antrian</x-nav-link>
+                        @endif
                         <x-nav-link :href="route('public.galeri.index')" :active="request()->routeIs('public.galeri.*')">Galeri</x-nav-link>
-                        <x-nav-link :href="route('public.pengaduan.create')" :active="request()->routeIs('public.pengaduan.*')">Pengaduan</x-nav-link>
+                        @if(!$isSystemLocked)
+                            <x-nav-link :href="route('public.pengaduan.create')" :active="request()->routeIs('public.pengaduan.*')">Pengaduan</x-nav-link>
+                        @endif
                         
                         @guest
-                            <a href="{{ route('login') }}" class="btn-primary">
-                                Masuk Layanan
+                            <a href="{{ $isSystemLocked ? route('home') . '#berlangganan' : route('login') }}" class="btn-primary">
+                                {{ $isSystemLocked ? 'Berlangganan' : 'Masuk Layanan' }}
                             </a>
                         @else
                             <a href="{{ route('dashboard') }}" class="btn-secondary">
@@ -123,8 +130,10 @@
                         </div>
                     </div>
                     <x-responsive-nav-link :href="route('public.berita.index')" :active="request()->routeIs('public.berita.*')">Berita</x-responsive-nav-link>
-                    <x-responsive-nav-link :href="route('public.surat.create')" :active="request()->routeIs('public.surat.*')">Layanan Surat</x-responsive-nav-link>
-                    <x-responsive-nav-link :href="route('public.antrian.create')" :active="request()->routeIs('public.antrian.*')">Antrian</x-responsive-nav-link>
+                    @if(!$isSystemLocked)
+                        <x-responsive-nav-link :href="route('public.surat.create')" :active="request()->routeIs('public.surat.*')">Layanan Surat</x-responsive-nav-link>
+                        <x-responsive-nav-link :href="route('public.antrian.create')" :active="request()->routeIs('public.antrian.*')">Antrian</x-responsive-nav-link>
+                    @endif
                     <x-responsive-nav-link :href="'#'">Galeri</x-responsive-nav-link>
                 </div>
 
@@ -132,8 +141,8 @@
                 <div class="pt-4 pb-1 border-t border-gray-200">
                     <div class="px-4">
                         @guest
-                            <a href="{{ route('login') }}" class="block w-full text-center btn-primary py-3">
-                                Masuk Layanan
+                            <a href="{{ $isSystemLocked ? route('home') . '#berlangganan' : route('login') }}" class="block w-full text-center btn-primary py-3">
+                                {{ $isSystemLocked ? 'Berlangganan' : 'Masuk Layanan' }}
                             </a>
                         @else
                             <a href="{{ route('dashboard') }}" class="block w-full text-center btn-secondary py-3">
@@ -153,7 +162,7 @@
         <!-- Footer -->
         <footer class="bg-slate-900 text-slate-300 pt-16 pb-8">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12 border-b border-slate-800 pb-12">
+                <div class="grid grid-cols-1 md:grid-cols-2 {{ $isSystemLocked ? 'lg:grid-cols-3' : 'lg:grid-cols-4' }} gap-12 mb-12 border-b border-slate-800 pb-12">
                     <div class="space-y-4">
                         <div class="flex items-center gap-3">
                              @if($village->logo)
@@ -173,13 +182,20 @@
                         <h4 class="text-white font-bold mb-6">Tautan Cepat</h4>
                         <ul class="space-y-3 text-sm">
                             <li><a href="{{ route('public.profil.index') }}" class="hover:text-brand-blue-400 transition-colors">Profil Desa</a></li>
-                            <li><a href="{{ route('public.pengaduan.create') }}" class="hover:text-brand-blue-400 transition-colors">Layanan Pengaduan</a></li>
-                            <li><a href="{{ route('public.antrian.create') }}" class="hover:text-brand-blue-400 transition-colors">Antrian Online</a></li>
-                            <li><a href="{{ route('public.berita.index') }}" class="hover:text-brand-blue-400 transition-colors">Berita Desa</a></li>
-                            <li><a href="#" class="hover:text-brand-blue-400 transition-colors">Transparansi Dana</a></li>
+                            @if($isSystemLocked)
+                                <li><a href="{{ route('public.berita.index') }}" class="hover:text-brand-blue-400 transition-colors">Berita Desa</a></li>
+                                <li><a href="{{ route('public.galeri.index') }}" class="hover:text-brand-blue-400 transition-colors">Galeri</a></li>
+                                <li><a href="#berlangganan" class="hover:text-brand-blue-400 transition-colors font-bold text-brand-blue-400">Berlangganan</a></li>
+                            @else
+                                <li><a href="{{ route('public.pengaduan.create') }}" class="hover:text-brand-blue-400 transition-colors">Layanan Pengaduan</a></li>
+                                <li><a href="{{ route('public.antrian.create') }}" class="hover:text-brand-blue-400 transition-colors">Antrian Online</a></li>
+                                <li><a href="{{ route('public.berita.index') }}" class="hover:text-brand-blue-400 transition-colors">Berita Desa</a></li>
+                                <li><a href="#" class="hover:text-brand-blue-400 transition-colors">Transparansi Dana</a></li>
+                            @endif
                         </ul>
                     </div>
 
+                    @if(!$isSystemLocked)
                     <div>
                         <h4 class="text-white font-bold mb-6">Informasi Kontak</h4>
                         <ul class="space-y-3 text-sm">
@@ -197,6 +213,7 @@
                             </li>
                         </ul>
                     </div>
+                    @endif
 
                     <div>
                         <h4 class="text-white font-bold mb-6">Media Sosial</h4>

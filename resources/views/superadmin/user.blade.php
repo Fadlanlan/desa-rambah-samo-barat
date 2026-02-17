@@ -94,7 +94,7 @@
                     @csrf
                     <div class="mb-8">
                         <h3 class="text-xl font-black text-slate-800 uppercase tracking-tighter">Tambah Pengguna</h3>
-                        <p class="text-slate-500 text-xs font-bold">Masukkan informasi akun admin baru desa.</p>
+                        <p class="text-slate-500 text-xs font-bold">Masukkan informasi akun baru. Akun Admin akan otomatis mendapatkan akses Layanan Warga.</p>
                     </div>
                     
                     <div class="space-y-4">

@@ -32,7 +32,12 @@ class UserController extends Controller
             'is_active' => true,
         ]);
 
-        $user->assignRole($request->role);
+        if ($request->role === 'admin') {
+            $user->assignRole(['admin', 'warga']);
+        }
+        else {
+            $user->assignRole($request->role);
+        }
 
         return redirect()->back()->with('success', 'User berhasil ditambahkan.');
     }
@@ -50,7 +55,12 @@ class UserController extends Controller
             'email' => $request->email,
         ]);
 
-        $user->syncRoles([$request->role]);
+        if ($request->role === 'admin') {
+            $user->syncRoles(['admin', 'warga']);
+        }
+        else {
+            $user->syncRoles([$request->role]);
+        }
 
         return redirect()->back()->with('success', 'User berhasil diperbarui.');
     }

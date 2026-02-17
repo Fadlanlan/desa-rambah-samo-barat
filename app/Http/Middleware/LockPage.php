@@ -26,16 +26,14 @@ class LockPage
         $isLocked = Setting::get($lockKey, '0');
 
         if ($isLocked === '1') {
-            $message = $target === 'admin' ? 'Halaman Administrator sedang dikunci untuk pemeliharaan.' : 'Halaman Layanan Masyarakat sedang dikunci sementara.';
-
-            // Only redirect if not already on the destination page to avoid loops
-            if (!$request->is('/')) {
-                return redirect('/')->with('error', $message);
+            // Allow access to the homepage even when locked
+            if ($request->is('/')) {
+                return $next($request);
             }
 
-            // If already on homepage, just show the locked view or continue with a warning
-            // For now, let's show a dedicated maintenance view to fulfill the "locked" requirement
-            return response()->view('errors.locked', compact('message', 'target'), 503);
+            $message = $target === 'admin' ? 'Halaman Administrator sedang dikunci untuk pemeliharaan.' : 'Halaman Layanan Masyarakat sedang dikunci sementara.';
+
+            return redirect('/')->with('error', $message);
         }
 
         return $next($request);
