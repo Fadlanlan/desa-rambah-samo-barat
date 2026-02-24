@@ -14,7 +14,7 @@ class SuperAdminSeeder extends Seeder
         ['email' => 'admin@desarambahsamobarat.id'],
         [
             'name' => 'Super Admin Desa',
-            'password' => Hash::make('AdminDesa123!'),
+            'password' => 'AdminDesa123!', // Model cast 'hashed' auto-hashes this
         ]
         );
 

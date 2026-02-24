@@ -135,10 +135,10 @@
         </div>
     </div>
 
-    <!-- Recent Data -->
+    <!-- Recent Data Row 1: Surat + Penduduk -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <!-- New Recent Surat Column -->
-        <div class="card overflow-hidden h-fit">
+        <!-- Surat Terbaru (1 col) -->
+        <div class="card overflow-hidden">
             <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
                 <h3 class="font-bold text-slate-800 uppercase tracking-tight text-sm flex items-center gap-2">
                     <svg class="h-4 w-4 text-brand-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
@@ -171,6 +171,7 @@
             </div>
         </div>
 
+        <!-- Update Penduduk Terbaru (2 cols) -->
         <div class="lg:col-span-2 card overflow-hidden">
             <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
                 <h3 class="font-bold text-slate-800 uppercase tracking-tight text-sm">Update Penduduk Terbaru</h3>
@@ -214,39 +215,40 @@
                 </table>
             </div>
         </div>
+    </div>
 
-        <div class="card overflow-hidden">
-            <div class="px-6 py-4 border-b border-slate-100">
+    <!-- Recent Data Row 2: Artikel Terakhir (full width) -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div class="lg:col-span-3 card overflow-hidden">
+            <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
                  <h3 class="font-bold text-slate-800 uppercase tracking-tight text-sm">Artikel Terakhir</h3>
+                 @if ($recentBerita->count() > 0)
+                 <a href="{{ route('berita.index') }}" class="text-[10px] font-black text-brand-blue-600 uppercase tracking-widest">Semua Artikel</a>
+                 @endif
             </div>
-            <div class="divide-y divide-slate-100">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 divide-y md:divide-y-0 md:divide-x divide-slate-100">
                 @if ($recentBerita->count() > 0)
                     @foreach ($recentBerita as $b)
-                    <div class="p-4 hover:bg-slate-50 transition-colors flex gap-4">
+                    <a href="{{ route('berita.edit', $b->id) }}" class="p-4 hover:bg-slate-50 transition-colors flex flex-col gap-3">
                         @if ($b->gambar)
-                        <img src="{{ asset('storage/' . $b->gambar) }}" class="h-10 w-14 object-cover rounded-lg border border-slate-100 shadow-sm" alt="">
+                        <img src="{{ asset('storage/' . $b->gambar) }}" class="h-24 w-full object-cover rounded-lg border border-slate-100 shadow-sm" alt="">
                         @else
-                        <div class="h-10 w-14 bg-slate-100 rounded-lg flex items-center justify-center text-slate-300">
-                            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        <div class="h-24 w-full bg-slate-100 rounded-lg flex items-center justify-center text-slate-300">
+                            <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                         </div>
                         @endif
                         <div class="min-w-0 flex-1">
-                            <p class="text-xs font-bold text-slate-900 truncate">{{ $b->judul }}</p>
+                            <p class="text-xs font-bold text-slate-900 line-clamp-2">{{ $b->judul }}</p>
                             <p class="text-[9px] text-slate-400 uppercase font-black mt-1">
                                 {{ $b->published_at ? (\Carbon\Carbon::parse($b->published_at)->format('d M Y')) : 'DRAFT' }}
                             </p>
                         </div>
-                    </div>
+                    </a>
                     @endforeach
                 @else
-                    <div class="p-12 text-center text-slate-400 italic text-xs">Belum ada artikel</div>
+                    <div class="lg:col-span-5 p-12 text-center text-slate-400 italic text-xs">Belum ada artikel</div>
                 @endif
             </div>
-            @if ($recentBerita->count() > 0)
-            <div class="p-4 bg-slate-50 text-center">
-                <a href="{{ route('berita.index') }}" class="text-[10px] font-black text-brand-blue-600 uppercase tracking-widest">Semua Artikel</a>
-            </div>
-            @endif
         </div>
     </div>
 </div>
