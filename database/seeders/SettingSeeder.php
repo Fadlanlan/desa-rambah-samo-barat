@@ -28,6 +28,18 @@ class SettingSeeder extends Seeder
             ['key' => 'social_instagram', 'value' => 'https://instagram.com/desarambahsamobarat', 'type' => 'text', 'group' => 'social'],
             ['key' => 'social_twitter', 'value' => 'https://twitter.com/desarambahsamobarat', 'type' => 'text', 'group' => 'social'],
             ['key' => 'social_youtube', 'value' => 'https://youtube.com/desarambahsamobarat', 'type' => 'text', 'group' => 'social'],
+
+            // Theme Colors
+            ['key' => 'theme_primary_color', 'value' => '#0c89eb', 'type' => 'color', 'group' => 'theme'],
+            ['key' => 'theme_secondary_color', 'value' => '#36b735', 'type' => 'color', 'group' => 'theme'],
+
+            // Public Menu Toggles
+            ['key' => 'menu_public_profil', 'value' => '1', 'type' => 'boolean', 'group' => 'menu'],
+            ['key' => 'menu_public_berita', 'value' => '1', 'type' => 'boolean', 'group' => 'menu'],
+            ['key' => 'menu_public_surat', 'value' => '1', 'type' => 'boolean', 'group' => 'menu'],
+            ['key' => 'menu_public_antrian', 'value' => '1', 'type' => 'boolean', 'group' => 'menu'],
+            ['key' => 'menu_public_galeri', 'value' => '1', 'type' => 'boolean', 'group' => 'menu'],
+            ['key' => 'menu_public_pengaduan', 'value' => '1', 'type' => 'boolean', 'group' => 'menu'],
         ];
 
         foreach ($settings as $setting) {

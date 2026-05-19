@@ -9,6 +9,36 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <style>
+        :root {
+            /* Exact original brand-blue colors */
+            --color-brand-blue-50: 240 247 255;
+            --color-brand-blue-100: 224 239 254;
+            --color-brand-blue-200: 185 223 254;
+            --color-brand-blue-300: 124 194 253;
+            --color-brand-blue-400: 54 164 250;
+            --color-brand-blue-500: 12 137 235;
+            --color-brand-blue-600: 6 109 193;
+            --color-brand-blue-700: 6 87 157;
+            --color-brand-blue-800: 8 74 129;
+            --color-brand-blue-900: 13 63 107;
+            --color-brand-blue-950: 9 40 70;
+
+            /* Exact original brand-green colors */
+            --color-brand-green-50: 242 252 241;
+            --color-brand-green-100: 225 249 224;
+            --color-brand-green-200: 195 242 194;
+            --color-brand-green-300: 148 230 147;
+            --color-brand-green-400: 93 209 92;
+            --color-brand-green-500: 54 183 53;
+            --color-brand-green-600: 40 151 39;
+            --color-brand-green-700: 33 119 33;
+            --color-brand-green-800: 31 94 31;
+            --color-brand-green-900: 27 79 27;
+            --color-brand-green-950: 10 44 10;
+        }
+    </style>
 </head>
 <body class="h-full font-sans antialiased text-slate-900">
     <div x-data="{ sidebarOpen: false }" class="min-h-full">
@@ -215,6 +245,11 @@
                                         <span class="text-xs font-semibold leading-6 text-brand-blue-400 uppercase tracking-widest pl-2 mt-4 inline-block">Data Desa</span>
                                         <a href="{{ route('apbdes.index') }}" class="{{ request()->routeIs('apbdes.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }} group flex gap-x-3 rounded-lg p-3 text-sm font-semibold leading-6 transition-all mt-1">
                                             APBDes
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('pembangunan.index') }}" class="{{ request()->routeIs('pembangunan.*') ? 'bg-brand-blue-800 text-white' : 'text-brand-blue-200 hover:text-white hover:bg-brand-blue-800' }} group flex gap-x-3 rounded-lg p-3 text-sm font-semibold leading-6 transition-all">
+                                            Pembangunan Fisik
                                         </a>
                                     </li>
                                     <li>

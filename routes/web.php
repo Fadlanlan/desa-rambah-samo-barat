@@ -79,6 +79,7 @@ $registerRoutes = function ($domain = null) {
                     Route::resource('dokumen', \App\Http\Controllers\Admin\DokumenController::class);
 
                     Route::resource('apbdes', \App\Http\Controllers\Admin\ApbdesController::class);
+                    Route::resource('pembangunan', \App\Http\Controllers\Admin\PembangunanController::class);
                     Route::resource('umkm', \App\Http\Controllers\Admin\UmkmController::class);
                     Route::resource('wisata', \App\Http\Controllers\Admin\WisataController::class);
 
@@ -121,7 +122,7 @@ $registerRoutes = function ($domain = null) {
             );
 
             // 3. Public Routes
-            $publicConfig = ['middleware' => ['lock:user']];
+            $publicConfig = ['middleware' => ['lock:user', 'menu.accessible']];
             if ($domain) {
                 $publicConfig['domain'] = $domain;
             }
@@ -145,7 +146,10 @@ $registerRoutes = function ($domain = null) {
             Route::get('/pengumuman', [\App\Http\Controllers\Publik\PengumumanController::class , 'index'])->name('public.pengumuman.index');
             Route::get('/pengumuman/{id}', [\App\Http\Controllers\Publik\PengumumanController::class , 'show'])->name('public.pengumuman.show');
             Route::get('/dokumen', [\App\Http\Controllers\Publik\DokumenController::class , 'index'])->name('public.dokumen.index');
+            Route::get('/transparansi', [\App\Http\Controllers\Publik\TransparansiController::class, 'index'])->name('public.transparansi.index');
             Route::get('/apbdes', [\App\Http\Controllers\Publik\ApbdesController::class , 'index'])->name('public.apbdes.index');
+            Route::get('/realisasi-anggaran', [\App\Http\Controllers\Publik\RealisasiController::class, 'index'])->name('public.realisasi.index');
+            Route::get('/laporan-pembangunan', [\App\Http\Controllers\Publik\PembangunanController::class, 'index'])->name('public.pembangunan.index');
 
             Route::get('/lapor', [\App\Http\Controllers\Publik\PengaduanPublikController::class , 'create'])->name('public.pengaduan.create');
             Route::post('/lapor', [\App\Http\Controllers\Publik\PengaduanPublikController::class , 'store'])->name('public.pengaduan.store');

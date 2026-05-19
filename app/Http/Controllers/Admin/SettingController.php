@@ -68,10 +68,20 @@ class SettingController extends Controller
         }
 
         // Handle General Settings
-        $data = $request->except(['_token', '_method', 'village_identity', 'nama_desa', 'visi', 'misi', 'sejarah', 'struktur_organisasi', 'logo']);
+        $data = $request->except(['_token', '_method', 'village_identity', 'nama_desa', 'visi', 'misi', 'sejarah', 'struktur_organisasi', 'logo', 'staff', 'staff_photos']);
 
         foreach ($data as $key => $value) {
-            Setting::where('key', $key)->update(['value' => $value]);
+            $setting = Setting::where('key', $key)->first();
+            if ($setting) {
+                $setting->update(['value' => $value]);
+            } else {
+                Setting::create([
+                    'key' => $key,
+                    'value' => $value,
+                    'group' => 'general',
+                    'type' => 'text'
+                ]);
+            }
         }
 
         return redirect()->back()->with('success', 'Pengaturan berhasil diperbarui.');

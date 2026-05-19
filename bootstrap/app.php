@@ -9,6 +9,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'role' => \App\Http\Middleware\RoleMiddleware::class,
             'lock' => \App\Http\Middleware\LockPage::class,
+            'menu.accessible' => \App\Http\Middleware\CheckMenuAccessibility::class,
         ]);
     })
     ->withRouting(
